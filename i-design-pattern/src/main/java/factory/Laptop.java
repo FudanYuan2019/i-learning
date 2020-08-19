@@ -4,8 +4,8 @@ import factory.abstractFactory.LaptopFactory;
 import factory.abstractFactory.LaptopFactoryMap;
 import factory.common.cpu.Cpu;
 import factory.common.memory.Memory;
-import factory.factoryMethod.cpuFactory.CpuFactoryMap;
-import factory.factoryMethod.cpuFactory.ICpuFactory;
+import factory.factoryMethod.CpuFactoryMap;
+import factory.factoryMethod.ICpuFactory;
 import factory.simpleFactory.CpuFactoryV2;
 
 /**
