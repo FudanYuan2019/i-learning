@@ -15,8 +15,8 @@ public class StaticInnerClassSingleton {
         return content;
     }
 
-    public static class StaticInnerClassSingletonHolder {
-        public static final StaticInnerClassSingleton staticInnerClassSingleton = new StaticInnerClassSingleton();
+    private static class StaticInnerClassSingletonHolder {
+        private static final StaticInnerClassSingleton staticInnerClassSingleton = new StaticInnerClassSingleton();
     }
 
     public static StaticInnerClassSingleton getInstance() {
