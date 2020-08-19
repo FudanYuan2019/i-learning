@@ -1,4 +1,4 @@
-package factory.factoryMethod.cpuFactory;
+package factory.factoryMethod;
 
 import factory.common.cpu.AmdCpu;
 import factory.common.cpu.Cpu;
