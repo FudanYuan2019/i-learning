@@ -1,4 +1,4 @@
-package factory;
+package factory.common;
 
 import factory.abstractFactory.LaptopFactory;
 import factory.abstractFactory.LaptopFactoryMap;
