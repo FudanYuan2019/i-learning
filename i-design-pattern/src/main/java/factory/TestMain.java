@@ -1,5 +1,7 @@
 package factory;
 
+import factory.common.Laptop;
+
 /**
  * @Author: Jeremy
  * @Date: 2020/8/19 17:05
