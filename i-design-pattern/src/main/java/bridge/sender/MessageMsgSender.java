@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class MessageMsgSender implements MsgSender {
 
-    List<String> phoneList;
+    private List<String> phoneList;
 
     public MessageMsgSender(List<String> phoneList) {
         this.phoneList = phoneList;
