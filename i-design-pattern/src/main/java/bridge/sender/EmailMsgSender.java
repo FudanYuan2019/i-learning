@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class EmailMsgSender implements MsgSender {
 
-    List<String> emailList;
+    private List<String> emailList;
 
     public EmailMsgSender(List<String> emailList) {
         this.emailList = emailList;
