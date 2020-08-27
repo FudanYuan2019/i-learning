@@ -14,10 +14,6 @@ public class Task {
     // task.config
     String config;
 
-    public void setDeployed(Boolean deployed) {
-        this.deployed = deployed;
-    }
-
     Boolean deployed;
 
     public Task(Long id, String command) {
@@ -39,6 +35,10 @@ public class Task {
 
     public void setConfig(String config) {
         this.config = config;
+    }
+
+    public void setDeployed(Boolean deployed) {
+        this.deployed = deployed;
     }
 
     @Override
