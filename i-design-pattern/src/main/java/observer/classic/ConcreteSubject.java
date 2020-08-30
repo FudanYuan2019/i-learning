@@ -1,4 +1,7 @@
-package observer;
+package observer.classic;
+
+import observer.common.Observer;
+import observer.common.Subject;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,6 @@
-package observer;
+package observer.eventbus;
+
+import observer.common.Observer;
 
 /**
  * @Author: Jeremy

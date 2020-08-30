@@ -1,4 +1,6 @@
-package observer;
+package observer.classic;
+
+import observer.common.Observer;
 
 /**
  * @Author: Jeremy
