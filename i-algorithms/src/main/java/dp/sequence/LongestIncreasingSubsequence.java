@@ -36,8 +36,15 @@ import java.util.*;
  * @Date: 2020/9/3 15:07
  */
 public class LongestIncreasingSubsequence {
-    private int count = 0;
-    private Set<String> set = new HashSet<>();
+    public static void main(String[] args) {
+        int[] nums = new int[]{2, 2, 2, 2, 2};
+        LongestIncreasingSubsequence longestIncreasingSubsequence = new LongestIncreasingSubsequence();
+        int res = longestIncreasingSubsequence.findLengthOfLCIS(nums);
+        System.out.println(res);
+
+        res = longestIncreasingSubsequence.findLengthOfLCIS2(nums);
+        System.out.println(res);
+    }
 
     /**
      * 动态规划，时间复杂度O(n2)，空间复杂度O(n)
@@ -111,15 +118,5 @@ public class LongestIncreasingSubsequence {
         }
 
         return piles;
-    }
-
-    public static void main(String[] args) {
-        int[] nums = new int[]{2, 2, 2, 2, 2};
-        LongestIncreasingSubsequence longestIncreasingSubsequence = new LongestIncreasingSubsequence();
-        int res = longestIncreasingSubsequence.findLengthOfLCIS(nums);
-        System.out.println(res);
-
-        res = longestIncreasingSubsequence.findLengthOfLCIS2(nums);
-        System.out.println(res);
     }
 }

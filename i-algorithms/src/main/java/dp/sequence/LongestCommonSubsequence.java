@@ -29,6 +29,14 @@ package dp.sequence;
  * @Date: 2020/9/3 15:03
  */
 public class LongestCommonSubsequence {
+    public static void main(String[] args) {
+        String text1 = "abcde";
+        String text2 = "ace";
+        LongestCommonSubsequence longestCommonSubsequence = new LongestCommonSubsequence();
+        int res = longestCommonSubsequence.longestCommonSubsequence(text1, text2);
+        System.out.println(res);
+    }
+
     public int longestCommonSubsequence(String text1, String text2) {
         if (text1 == null || text1.length() == 0 || text2 == null || text2.length() == 0) {
             return 0;
@@ -65,13 +73,5 @@ public class LongestCommonSubsequence {
         }
 
         return dp[M - 1][N - 1];
-    }
-
-    public static void main(String[] args) {
-        String text1 = "abcde";
-        String text2 = "ace";
-        LongestCommonSubsequence longestCommonSubsequence = new LongestCommonSubsequence();
-        int res = longestCommonSubsequence.longestCommonSubsequence(text1, text2);
-        System.out.println(res);
     }
 }
