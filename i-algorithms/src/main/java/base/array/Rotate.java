@@ -1,4 +1,4 @@
-package array;
+package base.array;
 
 import util.PrintUtil;
 

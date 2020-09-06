@@ -11,7 +11,7 @@ public class PrintUtil {
         System.out.println();
     }
 
-    public static void print(List<Integer> list) {
+    public static void print(List list) {
         for (Object object : list) {
             System.out.print(object + " ");
         }
