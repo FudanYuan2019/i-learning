@@ -38,6 +38,9 @@ public class TreeTraverse {
 
         List<String> paths = treeTraverse.binaryTreePaths(root);
         PrintUtil.print(paths);
+
+        List<Double> average = treeTraverse.averageOfLevels(root);
+        PrintUtil.print(average);
     }
 
     /**
@@ -159,6 +162,64 @@ public class TreeTraverse {
                 if (!levelList.isEmpty()) {
                     res.add(0, new ArrayList<>(levelList));
                     levelList.clear();
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * LeetCode 637  二叉树的层平均值
+     * 给定一个非空二叉树, 返回一个由每层节点平均值组成的数组。
+     * 示例 1：
+     * <p>
+     * 输入：
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     * 输出：[3, 14.5, 11]
+     * 解释：
+     * 第 0 层的平均值是 3 ,  第1层是 14.5 , 第2层是 11 。因此返回 [3, 14.5, 11] 。
+     *
+     * @param root
+     * @return
+     */
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        res.add(Double.valueOf(root.val));
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        TreeNode last = root;
+        TreeNode newLast = null;
+        double sum = 0;
+        int count = 0;
+        while (!queue.isEmpty()) {
+            TreeNode top = queue.poll();
+            if (top.left != null) {
+                queue.offer(top.left);
+                newLast = top.left;
+                sum += top.left.val;
+                count++;
+            }
+            if (top.right != null) {
+                queue.offer(top.right);
+                newLast = top.right;
+                sum += top.right.val;
+                count++;
+            }
+            if (top == last) {
+                last = newLast;
+                if (count != 0) {
+                    res.add(sum / count);
+                    sum = 0;
+                    count = 0;
                 }
             }
         }

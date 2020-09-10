@@ -14,6 +14,7 @@
         <module>i-rpc</module>
         <module>i-algorithms</module>
         <module>i-guava</module>
+        <module>i-java</module>
     </modules>
 
     <properties>
