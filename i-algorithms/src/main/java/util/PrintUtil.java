@@ -1,5 +1,8 @@
 package util;
 
+import base.tree.TreeNode;
+import base.tree.TreeTraverse;
+
 import java.util.List;
 
 /**
@@ -36,5 +39,13 @@ public class PrintUtil {
 
     public static void print(Object obj) {
         System.out.println(obj);
+    }
+
+    public static void print(TreeNode root) {
+        TreeTraverse treeTraverse = new TreeTraverse();
+        List<List<Integer>> res = treeTraverse.levelOrder(root);
+        for (List<Integer> list : res) {
+            print(list);
+        }
     }
 }

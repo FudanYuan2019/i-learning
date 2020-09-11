@@ -11,7 +11,7 @@ import java.util.List;
  * @Author: Jeremy
  * @Date: 2020/9/10 14:38
  */
-public class TreePathSum {
+public class TreePath {
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         TreeNode left = new TreeNode(2);
@@ -21,9 +21,12 @@ public class TreePathSum {
         root.right = right;
         left.left = leftLeft;
 
-        TreePathSum treePathSum = new TreePathSum();
-        int sum = treePathSum.sumNumbers(root);
+        TreePath treePath = new TreePath();
+        int sum = treePath.sumNumbers(root);
         PrintUtil.print(sum);
+
+        List<String> paths = treePath.binaryTreePaths(root);
+        PrintUtil.print(paths);
     }
 
     /**
@@ -96,5 +99,52 @@ public class TreePathSum {
             path.remove(path.size() - 1);
         }
         return res;
+    }
+
+    /**
+     * 二叉树的所有路径 LeetCode 257
+     * 给定一个二叉树，返回所有从根节点到叶子节点的路径。
+     * 说明: 叶子节点是指没有子节点的节点。
+     * <p>
+     * 示例:
+     * <p>
+     * 输入:
+     * <p>
+     *    1
+     *  /   \
+     * 2     3
+     * \
+     * 5
+     * <p>
+     * 输出: ["1->2->5", "1->3"]
+     * <p>
+     * 解释: 所有根节点到叶子节点的路径为: 1->2->5, 1->3
+     *
+     * @param root
+     * @return
+     */
+    public List<String> binaryTreePaths(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        String path = "";
+        List<String> paths = new ArrayList<>();
+        traverse(root, path, paths);
+        return paths;
+    }
+
+    public void traverse(TreeNode root, String path, List<String> paths) {
+        if (root == null) {
+            return;
+        }
+
+        path += root.val;
+        if (root.left == null && root.right == null) {
+            paths.add(path);
+        } else {
+            path += "->";
+            traverse(root.left, path, paths);
+            traverse(root.right, path, paths);
+        }
     }
 }
