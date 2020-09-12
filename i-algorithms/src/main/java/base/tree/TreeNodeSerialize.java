@@ -46,16 +46,15 @@ public class TreeNodeSerialize {
         node3.left = node5;
         node3.right = node6;
 
-        TreeNodeSerialize treeNodeSerialize = new TreeNodeSerialize();
-        String serialize = treeNodeSerialize.serialize(root);
+        String serialize = TreeNodeSerialize.serialize(root);
         PrintUtil.print(serialize);
 
-        TreeNode deserialize = treeNodeSerialize.deserialize(serialize);
+        TreeNode deserialize = TreeNodeSerialize.deserialize(serialize);
         PrintUtil.print(deserialize);
     }
 
     // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
+    public static String serialize(TreeNode root) {
         if (root == null) {
             return "null";
         }
@@ -78,7 +77,7 @@ public class TreeNodeSerialize {
     }
 
     // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
+    public static TreeNode deserialize(String data) {
         if ("null".equals(data)) {
             return null;
         }
@@ -106,7 +105,7 @@ public class TreeNodeSerialize {
         return root;
     }
 
-    private TreeNode getTreeNodeFromString(String nodeStr) {
+    private static TreeNode getTreeNodeFromString(String nodeStr) {
         if ("null".equals(nodeStr)) {
             return null;
         }

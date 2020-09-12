@@ -37,6 +37,13 @@ public class PrintUtil {
         }
     }
 
+    public static void print(String[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+    }
+
     public static void print(Object obj) {
         System.out.println(obj);
     }

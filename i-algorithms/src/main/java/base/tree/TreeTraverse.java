@@ -23,6 +23,9 @@ public class TreeTraverse {
         node2.right = node4;
 
         TreeTraverse treeTraverse = new TreeTraverse();
+        int[] levelOrderArray = treeTraverse.levelOrderI(root);
+        PrintUtil.print(levelOrderArray);
+
         List<List<Integer>> levelOrder = treeTraverse.levelOrder(root);
         for (List<Integer> subList : levelOrder) {
             PrintUtil.print(subList);
@@ -52,6 +55,20 @@ public class TreeTraverse {
 
         boolean symmetric = treeTraverse.isSymmetric(root);
         PrintUtil.print(symmetric);
+
+        String bstStr = "3,1,4,null,2";
+        root = TreeNodeSerialize.deserialize(bstStr);
+        int k = 1;
+        int kthVal = treeTraverse.kthLargest(root, k);
+        PrintUtil.print(kthVal);
+
+        int[] bstPostOrder = new int[]{1, 6, 3, 2, 5};
+        boolean isBst = treeTraverse.verifyPostorder(bstPostOrder);
+        PrintUtil.print(isBst);
+
+        bstStr = "4,2,5,1,3";
+        root = TreeNodeSerialize.deserialize(bstStr);
+        root = treeTraverse.treeToDoublyList(root);
     }
 
     /**
@@ -97,7 +114,7 @@ public class TreeTraverse {
 
     /**
      * leetCode 94 二叉树中序遍历
-     * 给定一个二叉树，返回它的中序遍历。
+     * 给定一个二叉树，返回它的 中序 遍历。
      * <p>
      * 示例:
      * <p>
@@ -134,6 +151,7 @@ public class TreeTraverse {
     }
 
     /**
+     * LeetCode 145. 二叉树的后序遍历
      * 给定一个二叉树，返回它的 后序 遍历。
      * <p>
      * 示例:
@@ -170,8 +188,54 @@ public class TreeTraverse {
     }
 
     /**
+     * 剑指 Offer 32 - I. 从上到下打印二叉树
+     * 从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
+     *
+     * 例如:
+     * 给定二叉树: [3,9,20,null,null,15,7],
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     * 返回：
+     *
+     * [3,9,20,15,7]
+     *
+     * @param root
+     * @return
+     */
+    public int[] levelOrderI(TreeNode root) {
+        if (root == null) {
+            return new int[]{};
+        }
+
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode top = queue.poll();
+            list.add(top.val);
+            if (top.left != null) {
+                queue.offer(top.left);
+            }
+            if (top.right != null) {
+                queue.offer(top.right);
+            }
+        }
+        int[] res = new int[list.size()];
+        int i = 0;
+        for (Integer val : list) {
+            res[i++] = val;
+        }
+        return res;
+    }
+
+    /**
      * LeetCode 102 二叉树的层序遍历
-     * 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+     * 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。
+     * （即逐层地，从左到右访问所有节点）。
      * <p>
      *  
      * <p>
@@ -234,7 +298,9 @@ public class TreeTraverse {
     }
 
     /**
-     * 给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+     * LeetCode 107. 二叉树的层次遍历 II
+     * 给定一个二叉树，返回其节点值自底向上的层次遍历。
+     * （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
      * <p>
      * 例如：
      * 给定二叉树 [3,9,20,null,null,15,7],
@@ -353,61 +419,9 @@ public class TreeTraverse {
     }
 
     /**
-     * LeetCode 101. 对称二叉树
-     * <p>
-     * 给定一个二叉树，检查它是否是镜像对称的。
-     * <p>
-     * 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
-     * <p>
-     *     1
-     *    / \
-     *   2   2
-     *  / \ / \
-     * 3  4 4  3
-     * <p>
-     * 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
-     * <p>
-     *     1
-     *    / \
-     *   2   2
-     *    \   \
-     *    3    3
-     * <p>
-     * @param root
-     * @return
-     */
-    public boolean isSymmetric(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        queue.offer(root);
-
-        while(!queue.isEmpty()) {
-            TreeNode n1 = queue.poll();
-            TreeNode n2 = queue.poll();
-
-            if (n1 == null && n2 == null) {
-                continue;
-            }
-            if ((n1 == null || n2 == null) || (n1.val != n2.val)) {
-                return false;
-            }
-
-            queue.offer(n1.left);
-            queue.offer(n2.right);
-
-            queue.offer(n1.right);
-            queue.offer(n2.left);
-        }
-        return true;
-    }
-
-    /**
      * LeetCode 103. 二叉树的锯齿形层次遍历
-     * 给定一个二叉树，返回其节点值的锯齿形层次遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
+     * 给定一个二叉树，返回其节点值的锯齿形层次遍历。
+     * （即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
      * <p>
      * 例如：
      * 给定二叉树 [3,9,20,null,null,15,7],
@@ -473,5 +487,192 @@ public class TreeTraverse {
             }
         }
         return res;
+    }
+
+    /**
+     * LeetCode 101. 对称二叉树
+     * <p>
+     * 给定一个二叉树，检查它是否是镜像对称的。
+     * <p>
+     * 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+     * <p>
+     *     1
+     *    / \
+     *   2   2
+     *  / \ / \
+     * 3  4 4  3
+     * <p>
+     * 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+     * <p>
+     *     1
+     *    / \
+     *   2   2
+     *    \   \
+     *    3    3
+     * <p>
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        queue.offer(root);
+
+        while(!queue.isEmpty()) {
+            TreeNode n1 = queue.poll();
+            TreeNode n2 = queue.poll();
+
+            if (n1 == null && n2 == null) {
+                continue;
+            }
+            if ((n1 == null || n2 == null) || (n1.val != n2.val)) {
+                return false;
+            }
+
+            queue.offer(n1.left);
+            queue.offer(n2.right);
+
+            queue.offer(n1.right);
+            queue.offer(n2.left);
+        }
+        return true;
+    }
+
+    /**
+     * 剑指 Offer 54. 二叉搜索树的第k大节点
+     * <p>
+     * 给定一棵二叉搜索树，请找出其中第k大的节点。
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: root = [3,1,4,null,2], k = 1
+     *    3
+     *   / \
+     *  1   4
+     *   \
+     *    2
+     * 输出: 4
+     * 示例 2:
+     * <p>
+     * 输入: root = [5,3,6,2,4,null,null,1], k = 3
+     *        5
+     *       / \
+     *      3   6
+     *     / \
+     *    2   4
+     *   /
+     *  1
+     * 输出: 4
+     *
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthLargest(TreeNode root, int k) {
+        if(root == null) {
+            return -1;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        int i = 0;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.right;
+            }
+            TreeNode top = stack.pop();
+            i++;
+            if (i == k) {
+                return top.val;
+            }
+            node = top.left;
+        }
+        return -1;
+    }
+
+    /**
+     * 剑指 Offer 33. 二叉搜索树的后序遍历序列
+     * 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。
+     * 如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。
+     * <p>
+     * 参考以下这颗二叉搜索树：
+     * <p>
+     *      5
+     *     / \
+     *    2   6
+     *   / \
+     *  1   3
+     * 示例 1：
+     * <p>
+     * 输入: [1,6,3,2,5]
+     * 输出: false
+     * 示例 2：
+     * <p>
+     * 输入: [1,3,2,6,5]
+     * 输出: true
+     *
+     * @param postorder
+     * @return
+     */
+    public boolean verifyPostorder(int[] postorder) {
+        Stack<Integer> stack = new Stack<>();
+        int root = Integer.MAX_VALUE;
+        for (int i = postorder.length - 1; i >= 0; i--) {
+            if (postorder[i] > root) {
+                return false;
+            }
+            while (!stack.isEmpty() && postorder[i] < stack.peek()) {
+                root = stack.pop();
+            }
+
+            stack.push(postorder[i]);
+        }
+        return true;
+    }
+
+    /**
+     * 剑指 Offer 36. 二叉搜索树与双向链表
+     * 
+     * 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。
+     * 要求不能创建任何新的节点，只能调整树中节点指针的指向。
+     * 
+     * @param root
+     * @return
+     */
+    public TreeNode treeToDoublyList(TreeNode root) {
+        if(root == null) {
+            return null;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode last = null;
+        TreeNode node = root;
+        TreeNode head = null;
+        while(!stack.isEmpty() || node != null){
+            while(node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+
+            node = stack.pop();
+            if (last == null) {
+                head = node;
+            } else {
+                last.right = node;
+            }
+            node.left = last;
+            last = node;
+
+            node = node.right;
+        }
+
+        last.right = head;
+        head.left = last;
+        return head;
     }
 }

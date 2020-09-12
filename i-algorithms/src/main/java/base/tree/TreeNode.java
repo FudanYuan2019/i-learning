@@ -5,7 +5,7 @@ package base.tree;
  * @Date: 2020/9/6 14:56
  */
 public class TreeNode {
-    Integer val;
+    int val;
     TreeNode left;
     TreeNode right;
 
