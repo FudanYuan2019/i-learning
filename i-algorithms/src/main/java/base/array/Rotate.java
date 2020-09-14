@@ -97,7 +97,7 @@ public class Rotate {
         int[][] matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         Rotate rotate = new Rotate();
         rotate.rotate(matrix);
-        PrintUtil.nextLine();
+        PrintUtil.newLine();
 
         matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         rotate.rotate2(matrix);

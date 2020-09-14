@@ -20,7 +20,7 @@ public class Permutation {
         permutation.nextPermutation(nums);
         nums = new int[]{1, 3, 2};
         permutation.nextPermutation(nums);
-        PrintUtil.nextLine();
+        PrintUtil.newLine();
 
         // 全排列
         nums = new int[]{1, 2, 3};
@@ -28,7 +28,7 @@ public class Permutation {
         for (List<Integer> subList : res) {
             PrintUtil.print(subList);
         }
-        PrintUtil.nextLine();
+        PrintUtil.newLine();
 
         // 全排列II
         nums = new int[]{1, 1, 2};
@@ -36,7 +36,7 @@ public class Permutation {
         for (List<Integer> subList : res) {
             PrintUtil.print(subList);
         }
-        PrintUtil.nextLine();
+        PrintUtil.newLine();
 
         // 第k个排列
         int n = 3;

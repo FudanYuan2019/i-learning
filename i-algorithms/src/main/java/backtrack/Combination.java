@@ -19,7 +19,7 @@ public class Combination {
         for (List<Integer> subList : res) {
             PrintUtil.print(subList);
         }
-        PrintUtil.nextLine();
+        PrintUtil.newLine();
 
         int[] candidates = new int[]{2, 3, 5};
         int target = 8;
@@ -27,7 +27,7 @@ public class Combination {
         for (List<Integer> subList : res) {
             PrintUtil.print(subList);
         }
-        PrintUtil.nextLine();
+        PrintUtil.newLine();
 
         candidates = new int[]{2, 5, 2, 1, 2};
         target = 5;
@@ -35,14 +35,14 @@ public class Combination {
         for (List<Integer> subList : res) {
             PrintUtil.print(subList);
         }
-        PrintUtil.nextLine();
+        PrintUtil.newLine();
 
         int k = 3, n = 7;
         res = combination.combinationSum3(k, n);
         for (List<Integer> subList : res) {
             PrintUtil.print(subList);
         }
-        PrintUtil.nextLine();
+        PrintUtil.newLine();
 
         candidates = new int[]{1, 2, 3};
         target = 4;

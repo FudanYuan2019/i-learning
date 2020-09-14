@@ -10,7 +10,7 @@ import java.util.List;
  * @Date: 2020/9/5 11:13
  */
 public class PrintUtil {
-    public static void nextLine() {
+    public static void newLine() {
         System.out.println();
     }
 
@@ -35,6 +35,16 @@ public class PrintUtil {
             }
             System.out.println();
         }
+    }
+
+    public static void print(char[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     public static void print(String[] array) {
