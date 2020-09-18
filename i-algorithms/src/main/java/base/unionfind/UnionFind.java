@@ -41,13 +41,15 @@ public class UnionFind {
      * @param x
      * @param y
      */
-    public void union(int x, int y) {
+    public boolean union(int x, int y) {
         x = find(x);
         y = find(y);
         if (x != y) {
             parent[x] = y;
+            return false;
         }
         this.count--;
+        return true;
     }
 
     /**

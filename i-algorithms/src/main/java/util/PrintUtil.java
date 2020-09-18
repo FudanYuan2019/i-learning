@@ -1,5 +1,6 @@
 package util;
 
+import base.list.ListNode;
 import base.tree.TreeNode;
 import base.tree.TreeTraverse;
 
@@ -65,4 +66,18 @@ public class PrintUtil {
             print(list);
         }
     }
+
+    public static void print(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        ListNode node = head;
+        while (node != null) {
+            System.out.print(node.val + "->");
+            node = node.next;
+        }
+        System.out.print("^");
+        System.out.println();
+    }
+
 }
