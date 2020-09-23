@@ -8,19 +8,7 @@ import util.PrintUtil;
  */
 public class Rotate {
     public static void main(String[] args) {
-        ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
-        ListNode listNode3 = new ListNode(3);
-        ListNode listNode4 = new ListNode(4);
-        ListNode listNode5 = new ListNode(5);
-        ListNode listNode6 = new ListNode(6);
-
-        listNode1.next = listNode2;
-        listNode2.next = listNode3;
-        listNode3.next = listNode4;
-        listNode4.next = listNode5;
-        listNode5.next = listNode6;
-
+        ListNode listNode1 = ListNodeSerializer.deserialize("1,2,3,4,5,6");
         Rotate rotate = new Rotate();
         ListNode node = rotate.rotateRight(listNode1, 4);
         PrintUtil.print(node);

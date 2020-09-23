@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 二叉树求路径和，LeetCode 129，
+ * 二叉树求路径和，LeetCode 129
  *
  * @Author: Jeremy
  * @Date: 2020/9/10 14:38
@@ -36,6 +36,9 @@ public class TreePath {
         root = TreeNodeSerialize.deserialize(treeStr);
         int num = treePath.pathSumNum(root, 8);
         PrintUtil.print(num);
+
+        int leftLeafSum = treePath.sumOfLeftLeaves(root);
+        PrintUtil.print(leftLeafSum);
     }
 
     /**
@@ -292,5 +295,42 @@ public class TreePath {
         res += dfs(root.left, sum);
         res += dfs(root.right, sum);
         return res;
+    }
+
+    /**
+     * LeetCode 404. 左叶子之和
+     * 计算给定二叉树的所有左叶子之和。
+     *
+     * 示例：
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     *
+     * 在这个二叉树中，有两个左叶子，分别是 9 和 15，所以返回 24
+     *
+     * @param root
+     * @return
+     */
+    public int sumOfLeftLeaves(TreeNode root) {
+        int res = 0;
+        if(root == null){
+            return res;
+        }
+        if(root.left != null && isLeafNode(root.left)){
+            res += root.left.val;
+        }
+        res += sumOfLeftLeaves(root.left);
+        res += sumOfLeftLeaves(root.right);
+        return res;
+    }
+
+    private boolean isLeafNode(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return root.left == null && root.right == null;
     }
 }

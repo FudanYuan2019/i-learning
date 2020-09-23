@@ -3,6 +3,7 @@ package backtrack;
 import util.PrintUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,11 +39,36 @@ public class Permutation {
         }
         PrintUtil.newLine();
 
+        // 求子集
+        nums = new int[]{1, 2, 3};
+        res = permutation.subsets(nums);
+        for (List<Integer> subList : res) {
+            PrintUtil.print(subList);
+        }
+        PrintUtil.newLine();
+
+        nums = new int[]{1, 2, 3};
+        res = permutation.subsetsI(nums);
+        for (List<Integer> subList : res) {
+            PrintUtil.print(subList);
+        }
+        PrintUtil.newLine();
+
         // 第k个排列
         int n = 3;
         int k = 3;
         String str = permutation.getPermutation(n, k);
         System.out.println(str);
+        PrintUtil.newLine();
+
+        // 组合问题
+        int[] array = new int[]{1, 2, 3, 4, 5};
+        n = array.length;
+        k = 3;
+        res = permutation.combination(array, n, k);
+        for (List<Integer> list : res) {
+            PrintUtil.print(list);
+        }
     }
 
     /**
@@ -212,6 +238,130 @@ public class Permutation {
     }
 
     /**
+     * 全排列II 解法二
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> permuteUniqueI(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+
+        int n = nums.length;
+        permutations(nums, n, n, res);
+        return res;
+    }
+
+    public void permutations(int[] nums, int n, int k, List<List<Integer>> res) {
+        if (k == 1) {
+            List<Integer> list = new ArrayList<>();
+            for (int num : nums) {
+                list.add(num);
+            }
+            if (!res.contains(list)) {
+                res.add(list);
+            }
+        }
+        for (int i = 0; i < k; i++) {
+            swap(nums, i, k - 1);
+            permutations(nums, n, k - 1, res);
+            swap(nums, i, k - 1);
+        }
+    }
+
+    /**
+     * LeetCode 78. 子集
+     * 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+     * <p>
+     * 说明：解集不能包含重复的子集。
+     * <p>
+     * 示例:
+     * <p>
+     * 输入: nums = [1,2,3]
+     * 输出:
+     * [
+     * [3],
+     *   [1],
+     *   [2],
+     *   [1,2,3],
+     *   [1,3],
+     *   [2,3],
+     *   [1,2],
+     *   []
+     * ]
+     * <p>
+     * 方法1：位图
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+
+        // 位图
+        int count = (int) Math.pow(2, nums.length);
+        for (int i = 0; i < count; i++) {
+            int[] list = transform(i, nums.length);
+            List<Integer> tmp = new ArrayList<>();
+            for (int j = 0; j < list.length; j++) {
+                if (list[j] != 0) {
+                    tmp.add(nums[j]);
+                }
+            }
+            res.add(tmp);
+        }
+        return res;
+    }
+
+    private int[] transform(int num, int size) {
+        int[] res = new int[size];
+        int count = 0;
+        while (num > 0) {
+            res[size - 1 - count++] = num % 2;
+            num /= 2;
+        }
+        return res;
+    }
+
+    /**
+     * 方法2：递归
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> subsetsI(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+
+        // 递归
+        int n = nums.length;
+        List<Integer> path = new ArrayList<>();
+        backtrack(nums, n, 0, path, res);
+        return res;
+    }
+
+    private void backtrack(int[] nums, int n, int k, List<Integer> path, List<List<Integer>> res) {
+        if (k == n) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        path.add(nums[k]);
+        backtrack(nums, n, k + 1, path, res);
+
+        path.remove(path.size() - 1);
+        backtrack(nums, n, k + 1, path, res);
+    }
+
+    /**
      * LeetCode 60 第k个排列
      * 给出集合 [1,2,3,…,n]，其所有元素共有 n! 种排列。
      * <p>
@@ -261,5 +411,35 @@ public class Permutation {
             k %= factorial;
         }
         return res.toString();
+    }
+
+    public List<List<Integer>> combination(int[] array, int m, int n) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (array == null || array.length == 0) {
+            return res;
+        }
+        if (n > m) {
+            throw new IllegalArgumentException("n should be less than m");
+        }
+
+        List<Integer> path = new ArrayList<>();
+        dfs(array, m, n, 0, path, res);
+        return res;
+    }
+
+    private void dfs(int[] array, int m, int n, int start, List<Integer> path, List<List<Integer>> res) {
+        if (path.size() == n) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int i = start; i < m; i++) {
+            if (path.contains(array[i])) {
+                continue;
+            }
+            path.add(array[i]);
+            dfs(array, m, n, i + 1, path, res);
+            path.remove(path.size() - 1);
+        }
     }
 }

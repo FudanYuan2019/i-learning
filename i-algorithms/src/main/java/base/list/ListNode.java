@@ -16,8 +16,21 @@ public class ListNode {
         this.next = null;
     }
 
-    ListNode(int val, ListNode next) {
+    public ListNode(int val, ListNode next) {
         this.val = val;
         this.next = next;
     }
+
+    /**
+     * @param head
+     * @return
+     */
+    public ListNode removeDuplicateNodes(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        return null;
+    }
+
+
 }

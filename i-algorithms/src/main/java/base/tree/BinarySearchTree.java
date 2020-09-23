@@ -3,6 +3,8 @@ package base.tree;
 import base.list.ListNode;
 import util.PrintUtil;
 
+import java.util.Stack;
+
 /**
  * 二叉搜索树
  *
@@ -26,6 +28,10 @@ public class BinarySearchTree {
         node3.next = node4;
 
         TreeNode root = binarySearchTree.sortedListToBST(head);
+        PrintUtil.print(root);
+
+        root = TreeNodeSerialize.deserialize("5,2,13");
+        binarySearchTree.convertBST(root);
         PrintUtil.print(root);
     }
     /**
@@ -114,5 +120,115 @@ public class BinarySearchTree {
             cur = cur.next;
         }
         return length;
+    }
+
+    /**
+     * LeetCode 538, 1038. 把二叉搜索树转换为累加树
+     * 给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，
+     * 使得每个节点的值是原来的节点值加上所有大于它的节点值之和。
+     *
+     * 例如：
+     *
+     * 输入: 原始二叉搜索树:
+     *               5
+     *             /   \
+     *            2     13
+     *
+     * 输出: 转换为累加树:
+     *              18
+     *             /   \
+     *           20     13
+     *
+     * @param root
+     * @return
+     */
+    public TreeNode convertBST(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        int sum = 0;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.right;
+            }
+
+            TreeNode top = stack.pop();
+            sum += top.val;
+            top.val = sum;
+            node = top.left;
+        }
+
+        return root;
+    }
+
+
+    private TreeNode parent;
+    private boolean isLeftTree;
+    public void delete(TreeNode root, int val) {
+        if (root == null) {
+            return;
+        }
+
+        TreeNode node = get(root, val);
+        if (node == null) {
+            return;
+        }
+        TreeNode left = node.left;
+        TreeNode right = node.right;
+        if (left == null && right == null) {
+            if (isLeftTree) {
+                parent.left = null;
+            } else {
+                parent.right = null;
+            }
+        } else if (right == null) {
+            if (isLeftTree) {
+                parent.left = node.left;
+            } else {
+                parent.right = node.left;
+            }
+        } else if (left == null) {
+            if (isLeftTree) {
+                parent.left = node.right;
+            } else {
+                parent.right = node.right;
+            }
+        } else {
+            TreeNode p = node;
+            TreeNode q = node.left;
+            while (q.right != null) {
+                p = q;
+                q = q.right;
+            }
+
+            node.val = q.val;
+            if (p != node) {
+                p.right = q.left;
+            } else {
+                p.left = q.left;
+            }
+        }
+    }
+
+    private TreeNode get(TreeNode root, int val) {
+        TreeNode node = root;
+        while(node != null) {
+            if (val > node.val) {
+                parent = node;
+                node = node.right;
+                isLeftTree = false;
+            } else if (val < node.val) {
+                parent = node;
+                node = node.left;
+                isLeftTree = true;
+            } else if (val == node.val) {
+                return node;
+            }
+        }
+        return null;
     }
 }
