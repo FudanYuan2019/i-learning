@@ -21,6 +21,11 @@ public class Reverse {
         PrintUtil.print(resStr);
 
         head = ListNodeSerializer.deserialize("1,2,3,4,5");
+        res = reverse.reverseListRecursive(head);
+        resStr = ListNodeSerializer.serialize(res);
+        PrintUtil.print(resStr);
+
+        head = ListNodeSerializer.deserialize("1,2,3,4,5");
         ListNode newHead = reverse.reverseBetween(head, m, n);
         String newHeadStr = ListNodeSerializer.serialize(newHead);
         PrintUtil.print(newHeadStr);
@@ -57,6 +62,18 @@ public class Reverse {
             cur = temp;
         }
         return pre;
+    }
+
+
+    public ListNode reverseListRecursive(ListNode head) {
+        if (head.next == null) {
+            return head;
+        }
+
+        ListNode node = reverseListRecursive(head.next);
+        head.next.next = head;
+        head.next = null;
+        return node;
     }
 
     /**

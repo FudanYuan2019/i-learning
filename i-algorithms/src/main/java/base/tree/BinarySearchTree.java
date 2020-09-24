@@ -3,7 +3,7 @@ package base.tree;
 import base.list.ListNode;
 import util.PrintUtil;
 
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 二叉搜索树
@@ -33,7 +33,12 @@ public class BinarySearchTree {
         root = TreeNodeSerialize.deserialize("5,2,13");
         binarySearchTree.convertBST(root);
         PrintUtil.print(root);
+
+        root = TreeNodeSerialize.deserialize("2,1,2");
+        int[] mode = binarySearchTree.findMode(root);
+        PrintUtil.print(mode);
     }
+
     /**
      * LeetCode 108. 将有序数组转换为二叉搜索树
      * 将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。
@@ -230,5 +235,73 @@ public class BinarySearchTree {
             }
         }
         return null;
+    }
+
+    /**
+     * 501. 二叉搜索树中的众数
+     * 给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。
+     * <p>
+     * 假定 BST 有如下定义：
+     * <p>
+     * 结点左子树中所含结点的值小于等于当前结点的值
+     * 结点右子树中所含结点的值大于等于当前结点的值
+     * 左子树和右子树都是二叉搜索树
+     * 例如：
+     * 给定 BST [1,null,2,2],
+     * <p>
+     *    1
+     *     \
+     *      2
+     *     /
+     *    2
+     * 返回[2].
+     *
+     * @param root
+     * @return
+     */
+    public int[] findMode(TreeNode root) {
+        if (root == null) {
+            return new int[]{};
+        }
+
+        Set<Integer> set = new HashSet<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        int last = root.val;
+        int max = 1;
+        int count = 0;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+
+            TreeNode top = stack.pop();
+            if (top.val == last) {
+                count++;
+            } else {
+                last = top.val;
+                count = 1;
+            }
+
+            if (count == max) {
+                set.add(top.val);
+            } else if (count > max) {
+                set.clear();
+                set.add(top.val);
+                max = count;
+            }
+
+            node = top.right;
+        }
+
+        int len = set.size();
+        int[] res = new int[len];
+        int index = 0;
+        for (Integer ele : set) {
+            res[index++] = ele;
+        }
+
+        return res;
     }
 }
