@@ -69,6 +69,11 @@ public class TreeTraverse {
         bstStr = "4,2,5,1,3";
         root = TreeNodeSerialize.deserialize(bstStr);
         root = treeTraverse.treeToDoublyList(root);
+
+        String treeStr = "1,2,3,4,5,null,7";
+        root = TreeNodeSerialize.deserialize(treeStr);
+        root = treeTraverse.connect(root);
+        PrintUtil.print(TreeNodeSerialize.serialize(root));
     }
 
     /**
@@ -384,7 +389,7 @@ public class TreeTraverse {
             return res;
         }
 
-        res.add(Double.valueOf(root.val));
+        res.add((double) root.val);
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
@@ -674,5 +679,105 @@ public class TreeTraverse {
         last.right = head;
         head.left = last;
         return head;
+    }
+
+
+    /**
+     * LeetCode 116. 填充每个节点的下一个右侧节点指针
+     * 给定一个完美二叉树，其所有叶子节点都在同一层，每个父节点都有两个子节点。
+     *
+     * 二叉树定义如下：
+     *
+     * struct Node {
+     *   int val;
+     *   Node *left;
+     *   Node *right;
+     *   Node *next;
+     * }
+     * 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。
+     * 如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
+     *
+     * 初始状态下，所有 next 指针都被设置为 NULL。
+     * @param root
+     * @return
+     */
+    public TreeNode connect(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        TreeNode last = root;
+        TreeNode newLast = null;
+        List<TreeNode> list = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            TreeNode top = queue.poll();
+            if (top.left != null) {
+                queue.offer(top.left);
+                newLast = top.left;
+                list.add(newLast);
+            }
+            if (top.right != null) {
+                queue.offer(top.right);
+                newLast = top.right;
+                list.add(newLast);
+            }
+            if (last == top) {
+                last = newLast;
+                for (int i = 0; i < list.size() - 1; i++) {
+                    list.get(i).next = list.get(i + 1);
+                }
+                list = new ArrayList<>();
+            }
+        }
+
+        return root;
+    }
+
+
+    /**
+     * LeetCode 117. 填充每个节点的下一个右侧节点指针 II
+     *
+     * 给定一个二叉树
+     *
+     * struct Node {
+     *   int val;
+     *   Node *left;
+     *   Node *right;
+     *   Node *next;
+     * }
+     * 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。
+     * 如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
+     *
+     * 初始状态下，所有 next 指针都被设置为 NULL。
+     *
+     * @param root
+     * @return
+     */
+    public TreeNode connectII(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+
+        TreeNode cur = root;
+        while (cur != null) {
+            TreeNode dummyHead = new TreeNode();
+            TreeNode prev = dummyHead;
+            while (cur != null) {
+                if (cur.left != null) {
+                    prev.next = cur.left;
+                    prev = cur.left;
+                }
+                if (cur.right != null) {
+                    prev.next = cur.right;
+                    prev = cur.right;
+                }
+                cur = cur.next;
+            }
+            cur = dummyHead.next;
+        }
+
+        return root;
     }
 }
