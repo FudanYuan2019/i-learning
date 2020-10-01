@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StudentMapper">
+
+    <resultMap type="Student" id="stuMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name" javaType="string" jdbcType="VARCHAR"/>
+        <result column="age" property="age" javaType="short" jdbcType="TINYINT"/>
+        <result column="sex" property="sex" javaType="short" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <select id="find" resultType="Student" parameterType="Long">
+        SELECT * FROM i_student where id = #{id};
+    </select>
+
+    <insert id="insert" parameterType="Student">
+        insert into i_student (name, age, sex)
+        values (#{name}, #{age}, #{sex})
+    </insert>
+
+</mapper>

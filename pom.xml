@@ -15,6 +15,7 @@
         <module>i-algorithms</module>
         <module>i-guava</module>
         <module>i-java</module>
+        <module>i-mybatis</module>
     </modules>
 
     <properties>
@@ -24,10 +25,22 @@
         <hessian.version>4.0.38</hessian.version>
         <cglib.version>3.2.5</cglib.version>
         <guava.version>29.0-jre</guava.version>
+        <lombok.version>1.16.16</lombok.version>
+        <log4j.version>1.2.17</log4j.version>
+        <junit.version>4.10</junit.version>
+        <mybatis.version>3.5.5</mybatis.version>
+        <mysql.version>8.0.21</mysql.version>
+
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>com.caucho</groupId>
                 <artifactId>hessian</artifactId>
@@ -46,6 +59,31 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
