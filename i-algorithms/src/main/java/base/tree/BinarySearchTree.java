@@ -37,6 +37,9 @@ public class BinarySearchTree {
         root = TreeNodeSerialize.deserialize("2,1,2");
         int[] mode = binarySearchTree.findMode(root);
         PrintUtil.print(mode);
+
+        root = binarySearchTree.insertIntoBST(root, 4);
+        PrintUtil.print(TreeNodeSerialize.serialize(root));
     }
 
     /**
@@ -303,5 +306,45 @@ public class BinarySearchTree {
         }
 
         return res;
+    }
+
+    /**
+     * 701. 二叉搜索树中的插入操作
+     * 给定二叉搜索树（BST）的根节点和要插入树中的值，将值插入二叉搜索树。
+     * 返回插入后二叉搜索树的根节点。 输入数据保证，新值和原始二叉搜索树中的任意节点值都不同。
+     *
+     * 注意，可能存在多种有效的插入方式，只要树在插入后仍保持为二叉搜索树即可。
+     * 你可以返回任意有效的结果。
+     * @param root
+     * @param val
+     * @return
+     */
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if (root == null) {
+            return new TreeNode(val);
+        }
+
+        TreeNode node = root;
+        TreeNode parent = null;
+        boolean isLeft = false;
+        while (node != null) {
+            if(val > node.val) {
+                parent = node;
+                node = node.right;
+                isLeft = false;
+            } else if (val < node.val) {
+                parent = node;
+                node = node.left;
+                isLeft = true;
+            } else if (val == node.val) {
+                break;
+            }
+        }
+        if (isLeft) {
+            parent.left = new TreeNode(val);
+        } else {
+            parent.right = new TreeNode(val);
+        }
+        return root;
     }
 }
