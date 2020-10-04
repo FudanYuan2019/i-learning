@@ -23,57 +23,65 @@ public class TreeTraverse {
         node2.right = node4;
 
         TreeTraverse treeTraverse = new TreeTraverse();
-        int[] levelOrderArray = treeTraverse.levelOrderI(root);
-        PrintUtil.print(levelOrderArray);
+        treeTraverse.preorderTraversalRecursive(root);
 
-        List<List<Integer>> levelOrder = treeTraverse.levelOrder(root);
-        for (List<Integer> subList : levelOrder) {
-            PrintUtil.print(subList);
-        }
+        treeTraverse.inorderTraversalRecursive(root);
 
-        levelOrder = treeTraverse.levelOrderBottom(root);
-        for (List<Integer> subList : levelOrder) {
-            PrintUtil.print(subList);
-        }
+        treeTraverse.postorderTraversalRecursive(root);
 
-        List<Double> average = treeTraverse.averageOfLevels(root);
-        PrintUtil.print(average);
+//        int[] levelOrderArray = treeTraverse.levelOrderI(root);
+//        PrintUtil.print(levelOrderArray);
+//
+//        List<List<Integer>> levelOrder = treeTraverse.levelOrder(root);
+//        for (List<Integer> subList : levelOrder) {
+//            PrintUtil.print(subList);
+//        }
+//
+//        levelOrder = treeTraverse.levelOrderBottom(root);
+//        for (List<Integer> subList : levelOrder) {
+//            PrintUtil.print(subList);
+//        }
+//
+//        List<Double> average = treeTraverse.averageOfLevels(root);
+//        PrintUtil.print(average);
+//
+//        List<Integer> preOrder = treeTraverse.preorderTraversal(root);
+//        PrintUtil.print(preOrder);
+//
+//        List<Integer> inOrder = treeTraverse.inorderTraversal(root);
+//        PrintUtil.print(inOrder);
+//
+//        List<Integer> postOrder = treeTraverse.postOrderTraversal(root);
+//        PrintUtil.print(postOrder);
+//
+//        List<List<Integer>> zigZagOrder = treeTraverse.zigzagLevelOrder(root);
+//        for (List<Integer> list : zigZagOrder) {
+//            PrintUtil.print(list);
+//        }
+//
+//        boolean symmetric = treeTraverse.isSymmetric(root);
+//        PrintUtil.print(symmetric);
+//
+//        String bstStr = "3,1,4,null,2";
+//        root = TreeNodeSerialize.deserialize(bstStr);
+//        int k = 1;
+//        int kthVal = treeTraverse.kthLargest(root, k);
+//        PrintUtil.print(kthVal);
+//
+//        int[] bstPostOrder = new int[]{1, 6, 3, 2, 5};
+//        boolean isBst = treeTraverse.verifyPostorder(bstPostOrder);
+//        PrintUtil.print(isBst);
+//
+//        bstStr = "4,2,5,1,3";
+//        root = TreeNodeSerialize.deserialize(bstStr);
+//        root = treeTraverse.treeToDoublyList(root);
+//
+//        String treeStr = "1,2,3,4,5,null,7";
+//        root = TreeNodeSerialize.deserialize(treeStr);
+//        root = treeTraverse.connect(root);
+//        PrintUtil.print(TreeNodeSerialize.serialize(root));
 
-        List<Integer> preOrder = treeTraverse.preorderTraversal(root);
-        PrintUtil.print(preOrder);
 
-        List<Integer> inOrder = treeTraverse.inorderTraversal(root);
-        PrintUtil.print(inOrder);
-
-        List<Integer> postOrder = treeTraverse.postOrderTraversal(root);
-        PrintUtil.print(postOrder);
-
-        List<List<Integer>> zigZagOrder = treeTraverse.zigzagLevelOrder(root);
-        for (List<Integer> list : zigZagOrder) {
-            PrintUtil.print(list);
-        }
-
-        boolean symmetric = treeTraverse.isSymmetric(root);
-        PrintUtil.print(symmetric);
-
-        String bstStr = "3,1,4,null,2";
-        root = TreeNodeSerialize.deserialize(bstStr);
-        int k = 1;
-        int kthVal = treeTraverse.kthLargest(root, k);
-        PrintUtil.print(kthVal);
-
-        int[] bstPostOrder = new int[]{1, 6, 3, 2, 5};
-        boolean isBst = treeTraverse.verifyPostorder(bstPostOrder);
-        PrintUtil.print(isBst);
-
-        bstStr = "4,2,5,1,3";
-        root = TreeNodeSerialize.deserialize(bstStr);
-        root = treeTraverse.treeToDoublyList(root);
-
-        String treeStr = "1,2,3,4,5,null,7";
-        root = TreeNodeSerialize.deserialize(treeStr);
-        root = treeTraverse.connect(root);
-        PrintUtil.print(TreeNodeSerialize.serialize(root));
     }
 
     /**
@@ -118,6 +126,25 @@ public class TreeTraverse {
     }
 
     /**
+     * 前序遍历的递归实现
+     * 若二叉树为空，则空操作，否则先访问根节点，再先序遍历左子树，最后先序遍历右子树。
+     * @param root
+     * @return
+     */
+    public void preorderTraversalRecursive(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        // 先访问根结点
+        System.out.println(root.val);
+        // 先序访问左子树
+        preorderTraversalRecursive(root.left);
+        // 再先序访问右子树
+        preorderTraversalRecursive(root.right);
+    }
+
+    /**
      * leetCode 94 二叉树中序遍历
      * 给定一个二叉树，返回它的 中序 遍历。
      * <p>
@@ -156,6 +183,25 @@ public class TreeTraverse {
     }
 
     /**
+     * 中序遍历的递归实现
+     * 若二叉树为空，则空操作，否则先中序遍历左子树，再访问根节点，最后中序遍历右子树。
+     * @param root
+     * @return
+     */
+    public void inorderTraversalRecursive(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        // 中序遍历左子树
+        inorderTraversalRecursive(root.left);
+        // 访问根节点
+        System.out.println(root.val);
+        // 中序遍历右子树
+        inorderTraversalRecursive(root.right);
+    }
+
+    /**
      * LeetCode 145. 二叉树的后序遍历
      * 给定一个二叉树，返回它的 后序 遍历。
      * <p>
@@ -190,6 +236,25 @@ public class TreeTraverse {
             }
         }
         return res;
+    }
+
+    /**
+     * 后序遍历的递归实现
+     * 若二叉树为空，则空操作；否则先后序遍历左子树，再后序遍历右子树，最后访问根结点。
+     * @param root
+     * @return
+     */
+    public void postorderTraversalRecursive(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        // 后序遍历左子树
+        postorderTraversalRecursive(root.left);
+        // 后序遍历右子树
+        postorderTraversalRecursive(root.right);
+        // 访问根节点
+        System.out.println(root.val);
     }
 
     /**
