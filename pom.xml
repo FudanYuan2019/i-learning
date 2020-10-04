@@ -10,11 +10,12 @@
     <version>0.0.1</version>
 
     <modules>
-        <module>i-design-pattern</module>
-        <module>i-rpc</module>
         <module>i-algorithms</module>
-        <module>i-guava</module>
+        <module>i-design-pattern</module>
         <module>i-java</module>
+        <module>i-rpc</module>
+        <module>i-spring</module>
+        <module>i-guava</module>
         <module>i-mybatis</module>
         <module>i-redis</module>
     </modules>
@@ -31,7 +32,7 @@
         <junit.version>4.10</junit.version>
         <mybatis.version>3.5.5</mybatis.version>
         <mysql.version>8.0.21</mysql.version>
-
+        <spring.version>5.2.6.RELEASE</spring.version>
     </properties>
 
     <dependencyManagement>
@@ -53,6 +54,13 @@
                 <artifactId>cglib</artifactId>
                 <version>${cglib.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
 
             <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
             <dependency>
