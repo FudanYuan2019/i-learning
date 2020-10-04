@@ -16,6 +16,7 @@
         <module>i-guava</module>
         <module>i-java</module>
         <module>i-mybatis</module>
+        <module>i-redis</module>
     </modules>
 
     <properties>
