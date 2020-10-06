@@ -1,5 +1,6 @@
 ### 目录
-1. [Redis介绍、Redis应用场景及Redis安装教程](./src/main/resources/redis学习笔记系列篇/01-Redis介绍及安装.md)
+0. [Redis完整版教程](./src/main/resources/redis学习笔记系列篇/00-完整版.md)
+1. [Redis介绍及安装](./src/main/resources/redis学习笔记系列篇/01-Redis介绍及安装.md)
 2. [Redis配置文件详解](./src/main/resources/redis学习笔记系列篇/02-Redis配置文件详解.md)
 3. [Redis基本数据类型之字符串](./src/main/resources/redis学习笔记系列篇/03-Redis基本数据类型之字符串.md)
 4. [Redis基本数据类型之列表](./src/main/resources/redis学习笔记系列篇/04-Redis基本数据类型之列表.md)
