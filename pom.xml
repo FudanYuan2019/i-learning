@@ -33,6 +33,7 @@
         <mybatis.version>3.5.5</mybatis.version>
         <mysql.version>8.0.21</mysql.version>
         <spring.version>5.2.6.RELEASE</spring.version>
+        <jedis.version>2.9.3</jedis.version>
     </properties>
 
     <dependencyManagement>
@@ -93,6 +94,11 @@
                 <version>${mybatis.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
