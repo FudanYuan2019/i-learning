@@ -274,3 +274,5 @@ SDIFFSTORE命令与SDIFF命令相似，区别在于SDIFFSTORE命令不直接返�
 (empty array) 
 ```
 
+#### 上一篇：[Redis基本数据类型之哈希](05-Redis基本数据类型之哈希.md)
+#### 下一篇：[Redis基本数据类型之有序集合](07-Redis基本数据类型之有序集合.md)
