@@ -441,3 +441,6 @@ rdb-save-incremental-fsync yes
 # 主词典扫描
 # active-defrag-max-scan-fields 1000
 ```
+
+上一篇：[Redis介绍、Redis应用场景及Redis安装教程](./src/main/resources/redis学习笔记系列篇/01-Redis介绍及安装.md)
+下一篇：[Redis基本数据类型之字符串](./src/main/resources/redis学习笔记系列篇/03-Redis基本数据类型之字符串.md)

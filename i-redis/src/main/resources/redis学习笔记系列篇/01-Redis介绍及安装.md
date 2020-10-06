@@ -80,3 +80,5 @@ shutdown
 ```
 
 3.9. 退出redis-cli，使用命令 `exit` 或者 `quit`。
+
+下一篇：[Redis配置文件详解](./src/main/resources/redis学习笔记系列篇/02-Redis配置文件详解.md)
