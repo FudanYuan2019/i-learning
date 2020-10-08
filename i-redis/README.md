@@ -12,3 +12,5 @@
 10. [Redis集群之主从复制模式](./src/main/resources/redis学习笔记系列篇/10-Redis集群之主从复制模式.md)
 11. [Redis集群之哨兵模式](./src/main/resources/redis学习笔记系列篇/11-Redis集群之哨兵模式.md)
 12. [Redis集群之Cluster模式](./src/main/resources/redis学习笔记系列篇/12-Redis集群之Cluster模式.md)
+13. [Redis应用案例汇总](./src/main/resources/redis学习笔记系列篇/13-Redis应用案例汇总.md)
+14. [Redis常见问题汇总](./src/main/resources/redis学习笔记系列篇/14-Redis常见问题汇总.md)
