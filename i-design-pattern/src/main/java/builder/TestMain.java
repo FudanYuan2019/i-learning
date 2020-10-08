@@ -14,7 +14,7 @@ public class TestMain {
                 .useCategory(false)
                 .keyword("Adidas")
                 .build();
-        System.out.println(queryCondition1.toString());
+        System.out.println(queryCondition1);
 
         QueryCondition queryCondition2 = new QueryCondition.QueryConditionBuilder()
                 .username("Jeremy")
@@ -25,7 +25,7 @@ public class TestMain {
                 .category("shoes")
                 .keyword("Adidas")
                 .build();
-        System.out.println(queryCondition2.toString());
+        System.out.println(queryCondition2);
 
     }
 }
