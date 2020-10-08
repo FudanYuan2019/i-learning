@@ -358,7 +358,7 @@ Redis 3.0.2及以上版本支持以下参数：
 (integer) 1
 ```
 
-## ZREMRANGEBYLEX
+* ZREMRANGEBYLEX
 `ZREMRANGEBYLEX`命令用于移除有序集合中以字典序排序指定范围内的元素，并返回实际移除的元素数量。
 ```ZREMRANGEBYLEX key min max```
 
@@ -417,4 +417,4 @@ Redis 3.0.2及以上版本支持以下参数：
 ```
 
 #### 上一篇：[Redis基本数据类型之集合](06-Redis基本数据类型之集合.md)
-#### 下一篇：[Redis事务](08-Redis事务.md)
+#### 下一篇：[Redis持久化](08-Redis持久化.md)
