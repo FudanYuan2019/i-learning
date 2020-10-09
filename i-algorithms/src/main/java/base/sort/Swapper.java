@@ -10,4 +10,10 @@ public class Swapper {
         nums[i] = nums[j];
         nums[j] = tmp;
     }
+
+    public static void swap(char[] nums, int i, int j) {
+        char tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
 }

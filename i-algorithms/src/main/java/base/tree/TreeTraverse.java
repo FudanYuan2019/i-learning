@@ -29,57 +29,57 @@ public class TreeTraverse {
 
         treeTraverse.postorderTraversalRecursive(root);
 
-//        int[] levelOrderArray = treeTraverse.levelOrderI(root);
-//        PrintUtil.print(levelOrderArray);
-//
-//        List<List<Integer>> levelOrder = treeTraverse.levelOrder(root);
-//        for (List<Integer> subList : levelOrder) {
-//            PrintUtil.print(subList);
-//        }
-//
-//        levelOrder = treeTraverse.levelOrderBottom(root);
-//        for (List<Integer> subList : levelOrder) {
-//            PrintUtil.print(subList);
-//        }
-//
-//        List<Double> average = treeTraverse.averageOfLevels(root);
-//        PrintUtil.print(average);
-//
-//        List<Integer> preOrder = treeTraverse.preorderTraversal(root);
-//        PrintUtil.print(preOrder);
-//
-//        List<Integer> inOrder = treeTraverse.inorderTraversal(root);
-//        PrintUtil.print(inOrder);
-//
-//        List<Integer> postOrder = treeTraverse.postOrderTraversal(root);
-//        PrintUtil.print(postOrder);
-//
-//        List<List<Integer>> zigZagOrder = treeTraverse.zigzagLevelOrder(root);
-//        for (List<Integer> list : zigZagOrder) {
-//            PrintUtil.print(list);
-//        }
-//
-//        boolean symmetric = treeTraverse.isSymmetric(root);
-//        PrintUtil.print(symmetric);
-//
-//        String bstStr = "3,1,4,null,2";
-//        root = TreeNodeSerialize.deserialize(bstStr);
-//        int k = 1;
-//        int kthVal = treeTraverse.kthLargest(root, k);
-//        PrintUtil.print(kthVal);
-//
-//        int[] bstPostOrder = new int[]{1, 6, 3, 2, 5};
-//        boolean isBst = treeTraverse.verifyPostorder(bstPostOrder);
-//        PrintUtil.print(isBst);
-//
-//        bstStr = "4,2,5,1,3";
-//        root = TreeNodeSerialize.deserialize(bstStr);
-//        root = treeTraverse.treeToDoublyList(root);
-//
-//        String treeStr = "1,2,3,4,5,null,7";
-//        root = TreeNodeSerialize.deserialize(treeStr);
-//        root = treeTraverse.connect(root);
-//        PrintUtil.print(TreeNodeSerialize.serialize(root));
+        int[] levelOrderArray = treeTraverse.levelOrderI(root);
+        PrintUtil.print(levelOrderArray);
+
+        List<List<Integer>> levelOrder = treeTraverse.levelOrder(root);
+        for (List<Integer> subList : levelOrder) {
+            PrintUtil.print(subList);
+        }
+
+        levelOrder = treeTraverse.levelOrderBottom(root);
+        for (List<Integer> subList : levelOrder) {
+            PrintUtil.print(subList);
+        }
+
+        List<Double> average = treeTraverse.averageOfLevels(root);
+        PrintUtil.print(average);
+
+        List<Integer> preOrder = treeTraverse.preorderTraversal(root);
+        PrintUtil.print(preOrder);
+
+        List<Integer> inOrder = treeTraverse.inorderTraversal(root);
+        PrintUtil.print(inOrder);
+
+        List<Integer> postOrder = treeTraverse.postOrderTraversal(root);
+        PrintUtil.print(postOrder);
+
+        List<List<Integer>> zigZagOrder = treeTraverse.zigzagLevelOrder(root);
+        for (List<Integer> list : zigZagOrder) {
+            PrintUtil.print(list);
+        }
+
+        boolean symmetric = treeTraverse.isSymmetric(root);
+        PrintUtil.print(symmetric);
+
+        String bstStr = "3,1,4,null,2";
+        root = TreeNodeSerialize.deserialize(bstStr);
+        int k = 1;
+        int kthVal = treeTraverse.kthLargest(root, k);
+        PrintUtil.print(kthVal);
+
+        int[] bstPostOrder = new int[]{1, 6, 3, 2, 5};
+        boolean isBst = treeTraverse.verifyPostorder(bstPostOrder);
+        PrintUtil.print(isBst);
+
+        bstStr = "4,2,5,1,3";
+        root = TreeNodeSerialize.deserialize(bstStr);
+        root = treeTraverse.treeToDoublyList(root);
+
+        String treeStr = "1,2,3,4,5,null,7";
+        root = TreeNodeSerialize.deserialize(treeStr);
+        root = treeTraverse.connect(root);
+        PrintUtil.print(TreeNodeSerialize.serialize(root));
 
 
     }
