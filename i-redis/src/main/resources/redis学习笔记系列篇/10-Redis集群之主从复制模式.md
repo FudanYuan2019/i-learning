@@ -6,12 +6,12 @@ Redis单机部署在测试环境是可以的，但是如果在生产环境也是
 
 #### 8.1 主从复制模式
 ##### 8.1.1 主从复制结构
-![Redis主从复制结构](https://upload-images.jianshu.io/upload_images/17795057-8a1a0371da5891e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Redis主从复制结构](../img/Redis主从复制结构.png)
 主从复制模式中包含一个主数据库实例（master）与一个或多个从数据库实例（slave），如上图。客户端可对主数据库进行读写操作，对从数据库进行读操作，主数据库写入的数据会实时自动同步给从数据库。
 
 ##### 8.1.2 主从复制工作机制
 当slave启动后，主动向master发送`PSYNC`命令。master接收到`PSYNC`命令后在后台保存快照（RDB持久化）和缓存保存快照这段时间的命令，然后将保存的快照文件和缓存的命令发送给slave。slave接收到快照文件和命令后加载快照文件和缓存的执行命令。复制初始化后，master每次接收到的写命令都会同步发送给slave，保证主从数据一致性。
- ![主从复制工作机制](https://upload-images.jianshu.io/upload_images/17795057-c4206e7f291ed38a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+ ![主从复制工作机制](../img/Redis主从复制实现原理.png)
 
 ##### 8.1.3 搭建过程
 1. 我们在[Redis学习笔记系列(一)——Redis简介及安装](https://www.jianshu.com/p/bd386de19a3b)一节中，已经介绍过单机部署的步骤了，现在我们需要再部署两台redis服务器，其中一台redis服务器做Master节点，另外两个节点作为Slave节点。每个节点的部署方法可参照前面那篇文章。
