@@ -40,6 +40,10 @@ public class BinarySearchTree {
 
         root = binarySearchTree.insertIntoBST(root, 4);
         PrintUtil.print(TreeNodeSerialize.serialize(root));
+
+        root = TreeNodeSerialize.deserialize("5,4,7");
+        int min = binarySearchTree.getMinimumDifference(root);
+        PrintUtil.print(min);
     }
 
     /**
@@ -346,5 +350,56 @@ public class BinarySearchTree {
             parent.right = new TreeNode(val);
         }
         return root;
+    }
+
+    /**
+     * LeetCode 530. 二叉搜索树的最小绝对差
+     * 给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值。
+     *
+     * 示例：
+     *
+     * 输入：
+     *
+     *    1
+     *     \
+     *      3
+     *     /
+     *    2
+     *
+     * 输出：
+     * 1
+     *
+     * 解释：
+     * 最小绝对差为 1，其中 2 和 1 的差的绝对值为 1（或者 2 和 3）。
+     * @param root
+     * @return
+     */
+    public int getMinimumDifference(TreeNode root) {
+        List<Integer> list = inorderTraverse(root);
+        int min = Integer.MAX_VALUE;
+        for(int i = 1; i < list.size(); i++) {
+            int diff = Math.abs(list.get(i - 1) - list.get(i));
+            if (diff < min) {
+                min = diff;
+            }
+        }
+        return min;
+    }
+
+    private List<Integer> inorderTraverse(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+
+            TreeNode top = stack.pop();
+            res.add(top.val);
+            node = top.right;
+        }
+        return res;
     }
 }
