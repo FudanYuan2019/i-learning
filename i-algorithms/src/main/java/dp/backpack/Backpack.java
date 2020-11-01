@@ -1,8 +1,9 @@
 package dp.backpack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.google.common.collect.Lists;
+import util.PrintUtil;
+
+import java.util.*;
 
 /**
  * 背包问题
@@ -49,6 +50,11 @@ public class Backpack {
         wordDict.add("cat");
         can = backpack.wordBreak(string, wordDict);
         System.out.println(can);
+
+        string = "pineapplepenapple";
+        wordDict = Lists.newArrayList("apple", "pen", "applepen", "pine", "pineapple");
+        List<String> lists = backpack.wordBreakII(string, wordDict);
+        PrintUtil.print(lists);
     }
 
     /**
@@ -308,9 +314,84 @@ public class Backpack {
     }
 
     /**
+     * LeetCode 140. 单词拆分 II
+     * 给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，
+     * 在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
+     * <p>
+     * 说明：
+     * <p>
+     * 分隔时可以重复使用字典中的单词。
+     * 你可以假设字典中没有重复的单词。
+     * 示例 1：
+     * <p>
+     * 输入:
+     * s = "catsanddog"
+     * wordDict = ["cat", "cats", "and", "sand", "dog"]
+     * 输出:
+     * [
+     * "cats and dog",
+     * "cat sand dog"
+     * ]
+     * 示例 2：
+     * <p>
+     * 输入:
+     * s = "pineapplepenapple"
+     * wordDict = ["apple", "pen", "applepen", "pine", "pineapple"]
+     * 输出:
+     * [
+     * "pine apple pen apple",
+     * "pineapple pen apple",
+     * "pine applepen apple"
+     * ]
+     * 解释: 注意你可以重复使用字典中的单词。
+     * 示例 3：
+     * <p>
+     * 输入:
+     * s = "catsandog"
+     * wordDict = ["cats", "dog", "sand", "and", "cat"]
+     * 输出:
+     * []
+     *
+     * @param s
+     * @param wordDict
+     * @return
+     */
+    public List<String> wordBreakII(String s, List<String> wordDict) {
+        Map<Integer, List<List<String>>> map = new HashMap<>();
+        List<List<String>> wordBreaks = backtrack(s, s.length(), new HashSet<>(wordDict), 0, map);
+        List<String> breakList = new LinkedList<>();
+        for (List<String> wordBreak : wordBreaks) {
+            breakList.add(String.join(" ", wordBreak));
+        }
+        return breakList;
+    }
+
+    public List<List<String>> backtrack(String s, int length, Set<String> wordSet, int index, Map<Integer, List<List<String>>> map) {
+        if (!map.containsKey(index)) {
+            List<List<String>> wordBreaks = new LinkedList<>();
+            if (index == length) {
+                wordBreaks.add(new LinkedList<>());
+            }
+            for (int i = index + 1; i <= length; i++) {
+                String word = s.substring(index, i);
+                if (wordSet.contains(word)) {
+                    List<List<String>> nextWordBreaks = backtrack(s, length, wordSet, i, map);
+                    for (List<String> nextWordBreak : nextWordBreaks) {
+                        LinkedList<String> wordBreak = new LinkedList<>(nextWordBreak);
+                        wordBreak.offerFirst(word);
+                        wordBreaks.add(wordBreak);
+                    }
+                }
+            }
+            map.put(index, wordBreaks);
+        }
+        return map.get(index);
+    }
+
+    /**
      * LeetCode 322 零钱兑换——完全背包，不考虑顺序
      * 给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
-     *
+     * <p>
      * 示例 1:
      * <p>
      * 输入: coins = [1, 2, 5], amount = 11
