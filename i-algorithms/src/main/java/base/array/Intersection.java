@@ -13,18 +13,65 @@ public class Intersection {
         int[] nums1 = new int[]{1, 2, 2, 1};
         int[] nums2 = new int[]{2, 2};
         Intersection intersection = new Intersection();
-        int[] res = intersection.intersect(nums1, nums2);
+        int[] res = intersection.intersectV0(nums1, nums2);
         PrintUtil.print(res);
 
         nums1 = new int[]{4, 9, 5};
         nums2 = new int[]{9, 4, 9, 8, 4};
-        res = intersection.intersect(nums1, nums2);
+        res = intersection.intersectV0(nums1, nums2);
+        PrintUtil.print(res);
+
+        nums1 = new int[]{4, 9, 5};
+        nums2 = new int[]{9, 4, 9, 8, 4};
+        res = intersection.intersectV1(nums1, nums2);
         PrintUtil.print(res);
 
         nums1 = new int[]{3, 1, 2};
         nums2 = new int[]{1, 1};
         res = intersection.intersectV2(nums1, nums2);
         PrintUtil.print(res);
+    }
+
+
+    /**
+     * 349. 两个数组的交集
+     * 给定两个数组，编写一个函数来计算它们的交集。
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入：nums1 = [1,2,2,1], nums2 = [2,2]
+     * 输出：[2]
+     * 示例 2：
+     * <p>
+     * 输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+     * 输出：[9,4]
+     * <p>
+     * 说明：
+     * <p>
+     * 输出结果中的每个元素一定是唯一的。
+     * 我们可以不考虑输出结果的顺序。
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int[] intersectV0(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return intersectV0(nums2, nums1);
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums1) {
+            set.add(num);
+        }
+        int[] intersection = new int[nums1.length];
+        int index = 0;
+        for (int num : nums2) {
+            if (set.contains(num)) {
+                intersection[index++] = num;
+                set.remove(num);
+            }
+        }
+        return Arrays.copyOfRange(intersection, 0, index);
     }
 
     /**
@@ -44,9 +91,9 @@ public class Intersection {
      * @param nums2
      * @return
      */
-    public int[] intersect(int[] nums1, int[] nums2) {
+    public int[] intersectV1(int[] nums1, int[] nums2) {
         if (nums1.length > nums2.length) {
-            return intersect(nums2, nums1);
+            return intersectV1(nums2, nums1);
         }
         Map<Integer, Integer> map = new HashMap<>();
         for (int num : nums1) {
