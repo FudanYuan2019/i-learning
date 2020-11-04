@@ -1,4 +1,4 @@
-package greedy.overlapInterval;
+package greedy.interval;
 
 import util.PrintUtil;
 
