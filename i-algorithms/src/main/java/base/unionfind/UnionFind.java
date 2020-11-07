@@ -82,15 +82,15 @@ public class UnionFind {
     }
 
     public static void main(String[] args) {
-        UnionFind unionFind = new UnionFind(5);
-        unionFind.union(1, 3);
-        unionFind.union(2, 4);
-        unionFind.union(2, 5);
-        unionFind.union(1, 5);
+        UnionFind unionFind = new UnionFind(9);
+        int[][] list = new int[][]{{1, 2}, {1, 3}, {5, 6}, {6, 7}, {5, 7}, {8, 9}};
 
+        for (int[] tuple : list) {
+            unionFind.union(tuple[0], tuple[1]);
+        }
         PrintUtil.print(unionFind.getParents());
 
-        boolean connected = unionFind.connected(3, 4);
+        boolean connected = unionFind.connected(2, 3);
         PrintUtil.print(connected);
 
         int count = unionFind.getCount();
